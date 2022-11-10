@@ -1,7 +1,9 @@
 <script lang="ts">
 import AppCard from "@/components/AppCard.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import greetings from "@/components/greetings";
 import { useAuthStore } from "@/stores/auth";
+import  { Icon } from "@iconify/vue";
 import { mapState } from "pinia";
 import { defineComponent } from "vue";
 import AppListItem from "../components/AppListItem.vue";
@@ -11,10 +13,62 @@ export default defineComponent({
   components: {
     AppCard,
     AppListItem,
+    BaseButton,
+    Icon
   },
   data: () => ({
     showModal: false,
     greetings,
+    courses: [
+      {
+        "id": 2,
+        "course_title": "ELECTRIC CIRCUIT THEORY 1",
+        "course_code": "ELE301",
+        "level": "300",
+        "created_at": "2022-10-19T16:25:00.030472Z",
+        "updated_at": "2022-10-19T16:25:00.030509Z"
+      },
+      {
+        "id": 3,
+        "course_title": "ELECTROMAGNETIC FIELD THEORY 1",
+        "course_code": "ELE303",
+        "level": "300",
+        "created_at": "2022-10-19T16:25:45.704982Z",
+        "updated_at": "2022-10-19T16:25:45.705023Z"
+      },
+      {
+        "id": 4,
+        "course_title": "ELECTROMECHANICAL DEVICES & MACHINES 1",
+        "course_code": "ELE305",
+        "level": "300",
+        "created_at": "2022-10-19T16:26:54.019527Z",
+        "updated_at": "2022-10-19T16:26:54.019576Z"
+      },
+      {
+        "id": 5,
+        "course_title": "ELECTRONIC CIRCUITS 1",
+        "course_code": "ELE307",
+        "level": "300",
+        "created_at": "2022-10-19T16:27:46.098702Z",
+        "updated_at": "2022-10-19T16:27:46.098744Z"
+      },
+      {
+        "id": 6,
+        "course_title": "PHYSICAL ELECTRONICS",
+        "course_code": "ELE 309",
+        "level": "300",
+        "created_at": "2022-10-19T16:28:28.648977Z",
+        "updated_at": "2022-10-19T16:28:28.649034Z"
+      },
+      {
+        "id": 7,
+        "course_title": "NUMERICAL METHODS IN ELECTRICAL % ELECTRONICS ENGINEERING 1",
+        "course_code": "ELE311",
+        "level": "300",
+        "created_at": "2022-10-19T16:29:12.628498Z",
+        "updated_at": "2022-10-19T16:29:12.628549Z"
+      }
+    ]
   }),
   computed: {
     //get the user from the store
@@ -28,7 +82,7 @@ export default defineComponent({
 
 <template>
   <!--greetings-->
-  <div class="d-sm-none">
+  <div class="d-sm-none d-none">
     <h3>
       Hi <strong style="text-transform: capitalize">{{ username }}! 😊 </strong>
     </h3>
@@ -37,42 +91,47 @@ export default defineComponent({
 
   <!--analytics overview-->
 
+  <h1>Course List</h1>
+  <div id="course__list">
+    <AppListItem v-for="course in courses" :key="course.id" :course="course">
+      <div class="course__code small">
+        {{ course.course_code }}
+      </div>
+      <div class="course__title trim__text">
+        {{ course.course_title }}
+      </div>
+    </AppListItem>
+
+  </div>
+  <!--next and previous button-->
+  <div>
+    <BaseButton text="prev">
+      <Icon icon="mdi:chevron-left" />
+    </BaseButton>
+    <BaseButton text="next">
+      <Icon icon="mdi:chevron-right" />
+    </BaseButton>
+  </div>
   <!--quotes and analytics header-->
 </template>
 
 <style scoped>
-#quotes-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.analytics-overview {
+#course__list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: space-between;
-  gap: 40px;
-  align-items: center;
-  display: none;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  margin-top: 1rem;
 }
 
-.analytics-overview>div {
-  border-radius: 5px;
-  min-height: 75px;
+.course__code {
+  color: #6c757d;
+  font-size: 8;
 }
 
-#header {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 35px;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.course__title {
+  width: 97%;
 }
 
-.card {
-  text-align: unset;
-}
 
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
