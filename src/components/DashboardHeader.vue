@@ -69,10 +69,6 @@ export default defineComponent({
         <RouterLink :to="{ name: 'notification' }">
           <Icon icon="mdi:bell-outline" /> <sup></sup>
         </RouterLink>
-
-        <RouterLink :to="{ name: 'emails' }">
-          <Icon icon="mdi:email-outline" /> <sup></sup>
-        </RouterLink>
       </div>
       <!--account option-->
       <div class="account__options">

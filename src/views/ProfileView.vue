@@ -122,65 +122,11 @@ export default defineComponent({
           type="text"
           class="field"
         />
-        <BaseButton text="" :disabled="disabledState" class="action__trigger">
-          <span v-show="!isLoading">Save Changes</span>
-          <Spinner
-            :animation-duration="1000"
-            :size="30"
-            :color="'#101010'"
-            v-show="isLoading"
-          />
-        </BaseButton>
+       
       </form>
     </section>
 
-    <section id="preferences">
-      <h3>Preferences</h3>
-      <div>
-        <AppSwitch v-model="preferences.darkMode" @click="toggleTheme" /> dark
-        mode
-      </div>
-      <div>
-        <AppSwitch v-model="preferences.showNetworkError" /> network error
-        message
-      </div>
-      <div>
-        <AppSwitch v-model="preferences.allowPushNotifications" /> allow push
-        notifications
-      </div>
-      <div><AppSwitch v-model="preferences.enable2FA" /> enable 2FA</div>
-    </section>
-
-    <section>
-      <h3>Security</h3>
-      <form action="" @submit.prevent="changePasswordRequest">
-        <BaseTextInput
-          placeholder="new password"
-          :show-icon="false"
-          label="New Password"
-          type="password"
-          class="field"
-          v-model="security.newPassword"
-        />
-        <BaseTextInput
-          placeholder="new password"
-          :show-icon="false"
-          label="Confirm Password"
-          type="password"
-          class="field"
-          v-model="security.confirmPassword"
-        />
-        <BaseButton text="" :disabled="disabledState">
-          <span v-show="!isLoading">Update Password</span>
-          <Spinner
-            :animation-duration="1000"
-            :size="30"
-            :color="'#101010'"
-            v-show="isLoading"
-          />
-        </BaseButton>
-      </form>
-    </section>
+   
   </div>
 </template>
 

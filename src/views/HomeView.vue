@@ -3,7 +3,7 @@ import AppCard from "@/components/AppCard.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import greetings from "@/components/greetings";
 import { useAuthStore } from "@/stores/auth";
-import  { Icon } from "@iconify/vue";
+import { Icon } from "@iconify/vue";
 import { mapState } from "pinia";
 import { defineComponent } from "vue";
 import AppListItem from "../components/AppListItem.vue";
@@ -91,20 +91,25 @@ export default defineComponent({
 
   <!--analytics overview-->
 
-  <h1>Course List</h1>
+  <h2>Course List</h2>
   <div id="course__list">
     <AppListItem v-for="course in courses" :key="course.id" :course="course">
-      <div class="course__code small">
-        {{ course.course_code }}
+      <div class="content">
+        <div class="course__code small">
+          {{ course.course_code }}
+        </div>
+        <div class="course__title trim__text">
+          {{ course.course_title }}
+        </div>
+
       </div>
-      <div class="course__title trim__text">
-        {{ course.course_title }}
-      </div>
+      <Icon icon="mdi:chevron-right" />
+
     </AppListItem>
 
   </div>
   <!--next and previous button-->
-  <div>
+  <div id="pagination">
     <BaseButton text="prev">
       <Icon icon="mdi:chevron-left" />
     </BaseButton>
@@ -123,15 +128,56 @@ export default defineComponent({
   margin-top: 1rem;
 }
 
+#course__list .list__item {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  -webkit-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  -moz-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  align-items: center;
+}
+
+#course__list .list__item svg {
+  color: var(--secondary);
+  font-size: 1.5rem;
+}
+
+#course__list .list__item .content {
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
 .course__code {
   color: #6c757d;
   font-size: 8;
 }
 
 .course__title {
-  width: 97%;
+  width: 250px;
 }
 
+#pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+#pagination button {
+  width: fit-content;
+  background-color: var(--border-color);
+  color: var(--primary);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
 
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
