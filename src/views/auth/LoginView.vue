@@ -69,6 +69,10 @@ export default defineComponent({
       <div></div>
       <!--logon form-->
       <div>
+        <div id="funaab__logo">
+          <img src="@/assets/illustrations/funaab.png" alt="funaab logo">
+        </div>
+
         <div class="title">
           <h1>Login</h1>
           <p class="sub__her__text">Please login to your account.</p>
@@ -108,13 +112,14 @@ export default defineComponent({
 
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <small class="goto__page">
+        <small class="goto__page d-none">
           Don&apos;t have an account?
           <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Sign up </RouterLink>
         </small>
 
-        <small class="goto__page">
-          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password? </RouterLink>
+        <small class="goto__page d-none">
+          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password?
+          </RouterLink>
         </small>
       </div>
     </div>
@@ -122,6 +127,16 @@ export default defineComponent({
 </template>
 
 <style scoped>
+#funaab__logo {
+  margin-bottom: 4.3rem;
+}
+
+#funaab__logo img {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}
+
 .social__login img {
   width: 35px;
   padding: 5px;

@@ -1,6 +1,5 @@
 <script lang="ts">
 import AppCard from "@/components/AppCard.vue";
-import Quotes from "@/components/AppQuotes.vue";
 import greetings from "@/components/greetings";
 import { useAuthStore } from "@/stores/auth";
 import { mapState } from "pinia";
@@ -11,7 +10,6 @@ export default defineComponent({
   name: "HomeView",
   components: {
     AppCard,
-    Quotes,
     AppListItem,
   },
   data: () => ({
@@ -38,19 +36,8 @@ export default defineComponent({
   </div>
 
   <!--analytics overview-->
-  <div class="analytics-overview">
-    <AppListItem> 234 </AppListItem>
 
-    <AppListItem> 234 </AppListItem>
-
-    <AppListItem> 234 </AppListItem>
-  </div>
   <!--quotes and analytics header-->
-  <div id="header">
-    <AppCard id="quotes-container">
-      <Quotes :duration="120" />
-    </AppCard>
-  </div>
 </template>
 
 <style scoped>
@@ -70,7 +57,7 @@ export default defineComponent({
   display: none;
 }
 
-.analytics-overview > div {
+.analytics-overview>div {
   border-radius: 5px;
   min-height: 75px;
 }
@@ -100,7 +87,7 @@ export default defineComponent({
     display: none;
   }
 
-  .analytics-overview > div {
+  .analytics-overview>div {
     min-height: 40px;
   }
 }
