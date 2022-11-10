@@ -51,7 +51,9 @@ export default defineComponent({
 
     //exec the login action coming from the store mapped actions
     login() {
-      this.makeLoginRequest(this.form);
+      // this.makeLoginRequest(this.form);
+      //goto home page
+      this.$router.push({ name: "home" });
     },
 
     //go to home, debug only
@@ -78,24 +80,8 @@ export default defineComponent({
           <p class="sub__her__text">Please login to your account.</p>
         </div>
 
-        <!--socila login buttons-->
-        <BaseButton text="continue with Google" class="social__login">
-          <img src="@/assets/icons/google.png" alt="continue with google" />
-        </BaseButton>
-        <BaseButton text="Continue with GitHub" class="social__login">
-          <img src="@/assets/icons/github.png" alt="continue with google" />
-        </BaseButton>
-        <BaseButton text="Continue with Twitter" class="social__login">
-          <img src="@/assets/icons/twitter.png" alt="continue with google" />
-        </BaseButton>
 
-        <!--continue with google-->
-        <!--continue with email-->
-        <small class="continue__with__email d-none">
-          <span class="divider__line"> ------------------ </span>
-          <span> continue with email </span>
-          <span class="divider__line"> ---------------- </span>
-        </small>
+       
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
           <BaseTextInput placeholder="example@mailer.com" label="email" v-model="form.email" type="email"
@@ -110,17 +96,6 @@ export default defineComponent({
           </BaseButton>
         </form>
 
-        <!--custom install script-->
-        <!-- Install button, hidden by default -->
-        <small class="goto__page d-none">
-          Don&apos;t have an account?
-          <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Sign up </RouterLink>
-        </small>
-
-        <small class="goto__page d-none">
-          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password?
-          </RouterLink>
-        </small>
       </div>
     </div>
   </div>

@@ -40,11 +40,15 @@ export default defineComponent({
       },
 
       {
-        name: "new",
+        name: "new record",
         icon: "mdi:plus-circle-outline",
-        path: "add-task",
+        path: "home",
       },
-
+      {
+        name:"students",
+        icon: "mdi:account-group-outline",
+        path:"home"
+      },
       {
         name: "account",
         icon: "mdi:account",

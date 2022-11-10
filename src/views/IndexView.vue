@@ -1,5 +1,5 @@
 <script lang="ts">
-import DashboardSidebarVue from "@/components/DashboardSidebar.vue";
+import DashboardSidebar from "@/components/DashboardSidebar.vue";
 import DashboardHeaderVue from "@/components/DashboardHeader.vue";
 import ViewLayoutVue from "@/components/ViewLayout.vue";
 import { defineComponent } from "vue";
@@ -8,10 +8,10 @@ import { mapActions, mapState } from "pinia";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
 export default defineComponent({
   components: {
-    DashboardSidebar: DashboardSidebarVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
     DashboardBottomNav,
+    DashboardSidebar
   },
   data: () => ({
     crumbs: ["Home", "Category", "Sub category"],
@@ -165,7 +165,6 @@ export default defineComponent({
         </ViewLayout>
       </div>
       <!--bottom navigation for mobile only-->
-      <DashboardBottomNav @close-sidebar="showSidebar = false" />
     </main>
   </div>
 </template>

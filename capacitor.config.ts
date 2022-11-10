@@ -1,8 +1,8 @@
 import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "com.nitride.app",
-  appName: "360 Devs",
+  appId: "com.drizzles.app",
+  appName: "RFID Attendance",
   webDir: "./dist",
   bundledWebRuntime: false,
   plugins: {

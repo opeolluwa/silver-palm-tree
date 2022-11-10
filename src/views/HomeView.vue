@@ -1,24 +1,49 @@
 <script lang="ts">
-import AppCard from "@/components/AppCard.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import greetings from "@/components/greetings";
-import { useAuthStore } from "@/stores/auth";
 import { Icon } from "@iconify/vue";
-import { mapState } from "pinia";
 import { defineComponent } from "vue";
 import AppListItem from "../components/AppListItem.vue";
-
+import axios from "axios";
+import Spinner from "@/components/Spinner.vue";
 export default defineComponent({
   name: "HomeView",
   components: {
-    AppCard,
     AppListItem,
     BaseButton,
-    Icon
+    Icon,
+    Spinner
+  },
+  methods: {
+    async getCourseList() {
+      try {
+        const { data: response } = await axios.get("https://attendance.olymosbiotechs.com.ng/courses/")
+        console.log(JSON.stringify({ response }));
+
+      } catch (error) {
+
+      }
+    },
+
+    seeAttendance() {
+      this.$router.push({ name: 'weeks' })
+    }
+  },
+  created() {
+    // watch the params of the route to fetch the data again
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.getCourseList()
+      },
+      // fetch the data when the view is created and the data is
+      // already being observed
+      { immediate: true }
+    )
   },
   data: () => ({
     showModal: false,
-    greetings,
+    isLoading: false,
+    hasError: false,
     courses: [
       {
         "id": 2,
@@ -70,54 +95,44 @@ export default defineComponent({
       }
     ]
   }),
-  computed: {
-    //get the user from the store
-    ...mapState(useAuthStore, { user: "userInformation" }),
-    username() {
-      return this.user?.username || "";
-    },
-  },
+
 });
 </script>
 
 <template>
-  <!--greetings-->
-  <div class="d-sm-none d-none">
-    <h3>
-      Hi <strong style="text-transform: capitalize">{{ username }}! 😊 </strong>
-    </h3>
-    <small>{{ greetings }}</small>
+  <div id="loading" v-if="isLoading">
+    <Spinner />
+    <h3>fetching data</h3>
   </div>
+  <div v-if="!isLoading && courses.length">
+    <h2>Please select a course</h2>
+    <div id="course__list">
+      <AppListItem v-for="course in courses" :key="course.id" :course="course" @click="seeAttendance">
+        <div class="content">
+          <div class="course__code small">
+            {{ course.course_code }}
+          </div>
+          <div class="course__title trim__text">
+            {{ course.course_title }}
+          </div>
 
-  <!--analytics overview-->
-
-  <h2>Course List</h2>
-  <div id="course__list">
-    <AppListItem v-for="course in courses" :key="course.id" :course="course">
-      <div class="content">
-        <div class="course__code small">
-          {{ course.course_code }}
         </div>
-        <div class="course__title trim__text">
-          {{ course.course_title }}
-        </div>
+        <Icon icon="mdi:chevron-right" />
 
-      </div>
-      <Icon icon="mdi:chevron-right" />
+      </AppListItem>
 
-    </AppListItem>
-
+    </div>
+    <!--next and previous button-->
+    <div id="pagination">
+      <BaseButton text="prev">
+        <Icon icon="mdi:chevron-left" />
+      </BaseButton>
+      <BaseButton text="next">
+        <Icon icon="mdi:chevron-right" />
+      </BaseButton>
+    </div>
+    <!--quotes and analytics header-->
   </div>
-  <!--next and previous button-->
-  <div id="pagination">
-    <BaseButton text="prev">
-      <Icon icon="mdi:chevron-left" />
-    </BaseButton>
-    <BaseButton text="next">
-      <Icon icon="mdi:chevron-right" />
-    </BaseButton>
-  </div>
-  <!--quotes and analytics header-->
 </template>
 
 <style scoped>
@@ -128,6 +143,8 @@ export default defineComponent({
   margin-top: 1rem;
 }
 
+
+
 #course__list .list__item {
   display: flex;
   justify-content: space-between;
@@ -135,6 +152,7 @@ export default defineComponent({
   -webkit-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   align-items: center;
+  cursor: pointer;
 }
 
 #course__list .list__item svg {
@@ -143,12 +161,13 @@ export default defineComponent({
 }
 
 #course__list .list__item .content {
-  padding-left: 15px;
-  padding-top: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
   padding-bottom: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: .9rem;
 
 }
 
@@ -174,10 +193,7 @@ export default defineComponent({
   color: var(--primary);
 }
 
-h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
+
 
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {

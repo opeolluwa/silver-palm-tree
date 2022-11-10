@@ -2,16 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import AuthenticationView from "@/views/auth/AuthIndexView.vue";
 import BaseLayout from "@/views/IndexView.vue";
 import HomeView from "@/views/HomeView.vue";
-import OnboardingView from "@/views/OnboardingIndexView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: "/helo",
-      name: "onboarding",
-      component: OnboardingView,
-    },
     {
       name: "auth",
       path: "/",
@@ -55,6 +49,12 @@ const router = createRouter({
           name: "profile",
           component: () => import("@/views/ProfileView.vue"),
         },
+        {
+          path: "weeks",
+          name: "weeks",
+          component: () => import("@/views/WeeksView.vue"),
+        },
+
         {
           path: "notification",
           name: "notification",
