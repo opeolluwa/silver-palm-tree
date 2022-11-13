@@ -17,12 +17,15 @@ export default defineComponent({
         path: "home",
       },
       {
+        name: "Set-up",
+        icon: "mdi:code-tags",
+        path: "setup",
+      },
+      {
         name: "notification",
         icon: "mdi:bell-outline",
         path: "notification",
       },
-
-
 
       {
         name: "profile",
@@ -113,7 +116,11 @@ export default defineComponent({
       <div id="nav__header">
         <div id="avatar">
           <!--icon-->
-          <img src="@/assets/img/illustration/default_user.png" alt="avatar" @click="goToProfile" />
+          <img
+            src="@/assets/img/illustration/default_user.png"
+            alt="avatar"
+            @click="goToProfile"
+          />
           <!---name and email-->
           <div id="user">
             <h3>{{ fullname }}</h3>
@@ -125,12 +132,16 @@ export default defineComponent({
       <div id="routes">
         <!--the links-->
         <div v-for="route in routes.sort()" :key="route.name">
-
           <!-- <hr class=divider> -->
-          <RouterLink :to="{ name: route.path }" class="link__item" :class="[
-            route.name === currentRouteName ? 'active' : '',
-            'capitalize',
-          ]" @click="closeSidebar">
+          <RouterLink
+            :to="{ name: route.path }"
+            class="link__item"
+            :class="[
+              route.name === currentRouteName ? 'active' : '',
+              'capitalize',
+            ]"
+            @click="closeSidebar"
+          >
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>

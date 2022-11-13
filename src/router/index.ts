@@ -31,13 +31,19 @@ const router = createRouter({
           name: "home",
           component: HomeView,
         },
-       
+
         {
           path: "projects",
           name: "projects",
           component: () => import("@/views/ProjectsView.vue"),
         },
-      
+
+        {
+          path: "setup",
+          name: "setup",
+          component: () => import("@/views/SetupView.vue"),
+        },
+
         {
           path: "settings",
           name: "settings",
@@ -50,9 +56,16 @@ const router = createRouter({
           component: () => import("@/views/ProfileView.vue"),
         },
         {
-          path: "weeks",
+          path: "weeks/:course",
           name: "weeks",
           component: () => import("@/views/WeeksView.vue"),
+        },
+
+        {
+          // student routes has a query param of course and week
+          path: "student/:course/:week",
+          name: "student",
+          component: () => import("@/views/StudentView.vue"),
         },
 
         {

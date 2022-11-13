@@ -11,91 +11,51 @@ export default defineComponent({
     AppListItem,
     BaseButton,
     Icon,
-    Spinner
+    Spinner,
   },
   methods: {
     async getCourseList() {
       try {
-        const { data: response } = await axios.get("https://attendance.olymosbiotechs.com.ng/courses/")
-        console.log(JSON.stringify({ response }));
+        // use fetch api to get https://attendance.olymosbiotechs.com.ng/courses
 
+        let result = await fetch(
+          "https://attendance.olymosbiotechs.com.ng/courses"
+        );
+
+        let data = await result.json();
+
+        // set the data to the courses variable
+        this.courses = data.results;
       } catch (error) {
-
+        console.log(error);
       }
     },
 
-    seeAttendance() {
-      this.$router.push({ name: 'weeks' })
-    }
+    seeAttendance(course_id) {
+      this.$router.push({
+        name: `weeks`,
+        params: { course: course_id },
+      });
+    },
   },
   created() {
     // watch the params of the route to fetch the data again
     this.$watch(
       () => this.$route.params,
       () => {
-        this.getCourseList()
+        this.getCourseList();
       },
       // fetch the data when the view is created and the data is
       // already being observed
       { immediate: true }
-    )
+    );
   },
   data: () => ({
     showModal: false,
     isLoading: false,
     hasError: false,
-    courses: [
-      {
-        "id": 2,
-        "course_title": "ELECTRIC CIRCUIT THEORY 1",
-        "course_code": "ELE301",
-        "level": "300",
-        "created_at": "2022-10-19T16:25:00.030472Z",
-        "updated_at": "2022-10-19T16:25:00.030509Z"
-      },
-      {
-        "id": 3,
-        "course_title": "ELECTROMAGNETIC FIELD THEORY 1",
-        "course_code": "ELE303",
-        "level": "300",
-        "created_at": "2022-10-19T16:25:45.704982Z",
-        "updated_at": "2022-10-19T16:25:45.705023Z"
-      },
-      {
-        "id": 4,
-        "course_title": "ELECTROMECHANICAL DEVICES & MACHINES 1",
-        "course_code": "ELE305",
-        "level": "300",
-        "created_at": "2022-10-19T16:26:54.019527Z",
-        "updated_at": "2022-10-19T16:26:54.019576Z"
-      },
-      {
-        "id": 5,
-        "course_title": "ELECTRONIC CIRCUITS 1",
-        "course_code": "ELE307",
-        "level": "300",
-        "created_at": "2022-10-19T16:27:46.098702Z",
-        "updated_at": "2022-10-19T16:27:46.098744Z"
-      },
-      {
-        "id": 6,
-        "course_title": "PHYSICAL ELECTRONICS",
-        "course_code": "ELE 309",
-        "level": "300",
-        "created_at": "2022-10-19T16:28:28.648977Z",
-        "updated_at": "2022-10-19T16:28:28.649034Z"
-      },
-      {
-        "id": 7,
-        "course_title": "NUMERICAL METHODS IN ELECTRICAL % ELECTRONICS ENGINEERING 1",
-        "course_code": "ELE311",
-        "level": "300",
-        "created_at": "2022-10-19T16:29:12.628498Z",
-        "updated_at": "2022-10-19T16:29:12.628549Z"
-      }
-    ]
+    courses: [],
   }),
-
 });
 </script>
 
@@ -107,7 +67,12 @@ export default defineComponent({
   <div v-if="!isLoading && courses.length">
     <h2>Please select a course</h2>
     <div id="course__list">
-      <AppListItem v-for="course in courses" :key="course.id" :course="course" @click="seeAttendance">
+      <AppListItem
+        v-for="course in courses"
+        :key="course.id"
+        :course="course"
+        @click="seeAttendance(course.id)"
+      >
         <div class="content">
           <div class="course__code small">
             {{ course.course_code }}
@@ -115,12 +80,9 @@ export default defineComponent({
           <div class="course__title trim__text">
             {{ course.course_title }}
           </div>
-
         </div>
         <Icon icon="mdi:chevron-right" />
-
       </AppListItem>
-
     </div>
     <!--next and previous button-->
     <div id="pagination">
@@ -142,8 +104,6 @@ export default defineComponent({
   grid-gap: 1rem;
   margin-top: 1rem;
 }
-
-
 
 #course__list .list__item {
   display: flex;
@@ -167,8 +127,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: .9rem;
-
+  font-size: 0.9rem;
 }
 
 .course__code {
@@ -193,8 +152,6 @@ export default defineComponent({
   color: var(--primary);
 }
 
-
-
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
   #header {
@@ -208,7 +165,7 @@ export default defineComponent({
     display: none;
   }
 
-  .analytics-overview>div {
+  .analytics-overview > div {
     min-height: 40px;
   }
 }

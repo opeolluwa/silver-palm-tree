@@ -3,16 +3,20 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "NotificationView",
   components: {},
+  methods: {
+    seeAttendance(week) {
+      let { course } = this.$route.params;
+      this.$router.push({ name: `student`, params: { course, week } });
+    },
+  },
 });
 </script>
 
 <template>
-  <h2 class="sub__hero__text title">
-    Please select a week
-  </h2>
+  <h2 class="sub__hero__text title">Please select a week</h2>
   <div id="weeks__container">
-    <div class="week" v-for="counter in 13">
-      week {{ String(counter).padStart(2, '0') }}
+    <div @click="seeAttendance(counter)" class="week" v-for="counter in 13">
+      week {{ String(counter).padStart(2, "0") }}
     </div>
   </div>
 </template>
