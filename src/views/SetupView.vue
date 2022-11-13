@@ -35,11 +35,10 @@ export default defineComponent({
     async setup() {
       try {
         this.isLoading = true;
+        let url = "https://attendance.olymosbiotechs.com.ng/set-courses-weeks/";
 
         let course = this.courseIdConverter(this.form.course);
         let week = this.form.week;
-
-        let url = `https://attendance.olymosbiotechs.com.ng/set-course-week/${course}/`;
 
         let data = {
           course,
@@ -48,7 +47,7 @@ export default defineComponent({
 
         // Default options are marked with *
         const response = await fetch(url, {
-          method: "PATCH",
+          method: "POST",
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
