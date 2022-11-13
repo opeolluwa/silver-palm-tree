@@ -90,77 +90,77 @@ define(['./workbox-3589c0c5'], (function (workbox) { 'use strict';
    */
 
   workbox.precacheAndRoute([{
-    "url": "assets/AllTodoViews.7e2e54b6.js",
+    "url": "assets/AllTodoViews.34fc2984.js",
     "revision": null
   }, {
     "url": "assets/AllTodoViews.d8a000c5.css",
     "revision": null
   }, {
+    "url": "assets/AppEmptyState.3d241f88.js",
+    "revision": null
+  }, {
     "url": "assets/AppEmptyState.52e2987e.css",
     "revision": null
   }, {
-    "url": "assets/AppEmptyState.eb056a82.js",
-    "revision": null
-  }, {
-    "url": "assets/CreateTodoView.c05c19c2.js",
+    "url": "assets/CreateTodoView.95689859.js",
     "revision": null
   }, {
     "url": "assets/CreateTodoView.dcd9f8dd.css",
     "revision": null
   }, {
-    "url": "assets/index.622e0597.css",
+    "url": "assets/index.8cd9f557.js",
     "revision": null
   }, {
-    "url": "assets/index.65347ae3.js",
+    "url": "assets/index.fba941e7.css",
     "revision": null
   }, {
     "url": "assets/NotFoundView.a763002d.css",
     "revision": null
   }, {
-    "url": "assets/NotFoundView.e2a50e5a.js",
+    "url": "assets/NotFoundView.d0038af3.js",
     "revision": null
   }, {
-    "url": "assets/NotificationView.b42f7653.js",
+    "url": "assets/NotificationView.70cfd52b.js",
     "revision": null
   }, {
-    "url": "assets/ProfileView.00a42b61.js",
+    "url": "assets/ProfileView.0c4c65ec.js",
     "revision": null
   }, {
     "url": "assets/ProfileView.a8dabee4.css",
     "revision": null
   }, {
+    "url": "assets/ProjectsView.4ff0ed72.js",
+    "revision": null
+  }, {
     "url": "assets/ProjectsView.c7fbd67f.css",
     "revision": null
   }, {
-    "url": "assets/ProjectsView.e640b5e4.js",
+    "url": "assets/SettingsView.0a40b533.js",
     "revision": null
   }, {
     "url": "assets/SettingsView.474e6fb0.css",
     "revision": null
   }, {
-    "url": "assets/SettingsView.686e45f4.js",
+    "url": "assets/tasks.6a5fcc84.js",
     "revision": null
   }, {
-    "url": "assets/tasks.51903f19.js",
+    "url": "assets/TodoIndexView.f09bee12.js",
     "revision": null
   }, {
-    "url": "assets/TodoIndexView.825fe2dd.js",
+    "url": "assets/web.4756b691.js",
     "revision": null
   }, {
-    "url": "assets/web.0cedbeff.js",
+    "url": "assets/web.57be139e.js",
     "revision": null
   }, {
-    "url": "assets/web.f165fcd3.js",
+    "url": "assets/WeeksView.940b7758.css",
     "revision": null
   }, {
-    "url": "assets/WeeksView.7cd24507.css",
-    "revision": null
-  }, {
-    "url": "assets/WeeksView.cb7469ad.js",
+    "url": "assets/WeeksView.ef50bbd4.js",
     "revision": null
   }, {
     "url": "index.html",
-    "revision": "b18119354b5d94d1f7078ee8420ec911"
+    "revision": "dc782cff680f595dd6b88a939eb0cd12"
   }, {
     "url": "registerSW.js",
     "revision": "1872c500de691dce40960bb85481de07"
