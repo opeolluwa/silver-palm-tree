@@ -17,8 +17,11 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() {},
+    toggleSidebar() { },
     ...mapActions(useAuthStore, ["logoutRequest"]),
+    goBack() {
+      this.$router.go(-1);
+    }
   },
   computed: {
     //get the user from the store
@@ -38,6 +41,10 @@ export default defineComponent({
       const route = this.$route.name;
       return String(route).replaceAll("-", " ") || "360 Devs";
     },
+    //is if current route us the home routs
+    isHomeRoute() {
+      return this.$route.name === "home";
+    },
     // the user fullname
     fullname() {
       return this.user?.fullname || "Default user";
@@ -49,7 +56,8 @@ export default defineComponent({
   <header class="view">
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
-      <Icon icon="mdi:menu" @click="$emit('open-sidebar')" />
+      <Icon icon="mdi:chevron-left" @click="goBack" v-if="!isHomeRoute" />
+
       <div id="current__route">
         <RouterLink :to="{ name: 'home' }">{{ currentRouteName }}</RouterLink>
       </div>

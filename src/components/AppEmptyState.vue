@@ -15,7 +15,7 @@ export default defineComponent({
   props: {
     message: {
       type: String,
-      default: "No data found! They will be displayed once you add them",
+      default: "No data found! ",
     },
   },
 });
@@ -32,7 +32,6 @@ export default defineComponent({
   padding: 40px auto;
   margin: 40px auto;
   row-gap: 20px;
-  text-align: center;
 }
 
 .empty-state img {

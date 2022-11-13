@@ -1,8 +1,10 @@
 <script lang="ts">
+import AppEmptyState from "@/components/AppEmptyState.vue";
+import AppListItem from "@/components/AppListItem.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "StudentView",
-  components: {},
+  components: { AppListItem, AppEmptyState },
   methods: {
     async getStudentsAttendance() {
       try {
@@ -18,7 +20,7 @@ export default defineComponent({
         let data = await result.json();
         // set the data to the courses variable
         this.students = data.results;
-        this.week = week;
+        this.week = String(week);
       } catch (error) {
         console.log(error);
       }
@@ -50,46 +52,9 @@ export default defineComponent({
   <h2 class="sub__hero__text title">Student Attendance for week {{ week }}</h2>
   <div id="course__list">
     <!-- Table with 3 columns -->
-    <table class="table">
-      <thead class="table_head">
-        <tr class="table_row">
-          <th class="table_row_no">#</th>
-          <th class="table_row_name">Student Name</th>
-          <th class="table_row_card_id">Card Id</th>
-          <th class="table_row_card_status">Status</th>
-        </tr>
-      </thead>
-      <tbody class="table_body">
-        <tr class="table_row" v-for="student in students" :key="student.id">
-          <th class="table_row_no">{{ students.indexOf(student) + 1 }}</th>
-          <th class="table_row_name">
-            {{ student.last_name }} {{ student.first_name }}
-          </th>
-          <th class="table_row_card_id">{{ student.card_id }}</th>
-          <th class="table_row_card_status_row">{{ student.status }}</th>
-        </tr>
-      </tbody>
-    </table>
-    <AppListItem
-      v-for="student in students"
-      :key="student.id"
-      :course="student"
-    >
-      <!-- Create a vue table with 3 columns -->
-
-      <!-- 1. Student Name -->
-      <!-- 2. Student Email -->
-      <!-- 3. Student Attendance -->
-
-      <div class="content">
-        <div class="course__code small">
-          {{ student.course_code }}
-        </div>
-        <div class="course__title trim__text">
-          {{ student.course_title }}
-        </div>
-      </div>
-      <Icon icon="mdi:chevron-right" />
+    <AppEmptyState v-if="!students.length" />
+    <AppListItem v-for="student in (students as any)" :key="student.id" class="student__data" v-else>
+      {{ student.last_name }} {{ student.first_name }} {{ student.status }}
     </AppListItem>
   </div>
 </template>
@@ -97,6 +62,13 @@ export default defineComponent({
 <style scoped>
 h2 {
   margin-bottom: 2rem;
+}
+
+.student__data {
+  box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  -webkit-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  -moz-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  padding: 10px 7.5px;
 }
 
 #weeks__container {
@@ -124,6 +96,7 @@ h2 {
   cursor: pointer;
   width: fit-content;
 }
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -135,14 +108,16 @@ h2 {
   -webkit-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
 }
+
 .table_head {
   background-color: var(--primary-color);
   font-weight: 600 !important;
 }
+
 .table_row_card_status_row {
   color: green;
   text-transform: lowercase;
 }
-.table_row {
-}
+
+.table_row {}
 </style>

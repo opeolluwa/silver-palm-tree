@@ -25,13 +25,15 @@ export default defineComponent({
         let data = await result.json();
 
         // set the data to the courses variable
+        const courses: Array<any> = data.results;
+        // this.courses = courses as Array<any>;
         this.courses = data.results;
       } catch (error) {
         console.log(error);
       }
     },
 
-    seeAttendance(course_id) {
+    seeAttendance(course_id: any) {
       this.$router.push({
         name: `weeks`,
         params: { course: course_id },
@@ -67,12 +69,8 @@ export default defineComponent({
   <div v-if="!isLoading && courses.length">
     <h2>Please select a course</h2>
     <div id="course__list">
-      <AppListItem
-        v-for="course in courses"
-        :key="course.id"
-        :course="course"
-        @click="seeAttendance(course.id)"
-      >
+      <AppListItem v-for="course in (courses as any)" :key="course.id" :course="course"
+        @click="seeAttendance(course.id)">
         <div class="content">
           <div class="course__code small">
             {{ course.course_code }}
@@ -165,7 +163,7 @@ export default defineComponent({
     display: none;
   }
 
-  .analytics-overview > div {
+  .analytics-overview>div {
     min-height: 40px;
   }
 }

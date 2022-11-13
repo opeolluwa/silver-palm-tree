@@ -4,7 +4,7 @@ export default defineComponent({
   name: "NotificationView",
   components: {},
   methods: {
-    seeAttendance(week) {
+    seeAttendance(week: number) {
       let { course } = this.$route.params;
       this.$router.push({ name: `student`, params: { course, week } });
     },
@@ -30,6 +30,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 

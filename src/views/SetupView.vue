@@ -13,7 +13,7 @@ export default defineComponent({
     Spinner,
   },
   methods: {
-    courseIdConverter(course) {
+    courseIdConverter(course: string) {
       switch (course) {
         case "ELE301":
           return 2;
