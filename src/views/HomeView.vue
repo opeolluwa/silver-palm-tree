@@ -15,11 +15,24 @@ export default defineComponent({
   },
   methods: {
     async getCourseList() {
+      const headers = {
+        'Authorization': 'Bearer ${accessToken}',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Methods': "POST, GET, OPTIONS",
+        'Access-Control-Allow-Credentials': true,
+        'Sec-Fetch-Mode': "no-cors,",
+        'Sec-Fetch-Site': "same-site"
+      }
       try {
-        const { data: response } = await axios.get("https://attendance.olymosbiotechs.com.ng/courses/")
+        // get request with custom headers
+
+        const response = await axios.get("https://attendance.olymosbiotechs.com.ng/courses")
         console.log(JSON.stringify({ response }));
 
-      } catch (error) {
+      } catch (error: any) {
+        console.log({ apiError: error.message });
 
       }
     },
@@ -29,8 +42,19 @@ export default defineComponent({
     }
   },
   created() {
+ /*    (async () => {
+      axios.get('https://attendance.olymosbiotechs.com.ng/students',  {
+        headers: {
+          // remove headers
+        }
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err.response);
+      });
+    })() */
     // watch the params of the route to fetch the data again
-    this.$watch(
+   /*  this.$watch(
       () => this.$route.params,
       () => {
         this.getCourseList()
@@ -38,7 +62,7 @@ export default defineComponent({
       // fetch the data when the view is created and the data is
       // already being observed
       { immediate: true }
-    )
+    ) */
   },
   data: () => ({
     showModal: false,
@@ -127,7 +151,7 @@ export default defineComponent({
       <BaseButton text="prev">
         <Icon icon="mdi:chevron-left" />
       </BaseButton>
-      <BaseButton text="next">
+      <BaseButton text="next" @click="getCourseList">
         <Icon icon="mdi:chevron-right" />
       </BaseButton>
     </div>

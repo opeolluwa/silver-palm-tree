@@ -65,7 +65,7 @@ export const useAuthStore = defineStore("authStore", {
           this.apiResponseMsg = response.message;
           appToastComponent.error(response.message);
         }
-        // console.log(JSON.stringify(error.response.data));
+        // console.lg(JSON.stringify(error.response.data));
       }
     },
 

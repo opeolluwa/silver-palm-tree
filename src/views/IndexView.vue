@@ -68,7 +68,7 @@ export default defineComponent({
     //breadcrumb
   },
   created() {
-    this.makeAuthRequest();
+    // this.makeAuthRequest();
   },
   mounted() {
     this.showSidebar = window.matchMedia("(max-width: 400px)").matches
