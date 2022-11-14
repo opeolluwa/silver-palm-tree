@@ -59,7 +59,7 @@ export default defineComponent({
   computed: {
     currentRouteName() {
       const route = this.$route.name;
-      return String(route) || "360 Devs";
+      return String(route) || "RFID";
     },
   },
   methods: {

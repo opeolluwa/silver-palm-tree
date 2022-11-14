@@ -49,12 +49,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2 class="sub__hero__text title">Student Attendance for week {{ week }}</h2>
+  <h2 class="sub__hero__text title"> Present Student Record for week {{ week }}</h2>
   <div id="course__list">
     <!-- Table with 3 columns -->
     <AppEmptyState v-if="!students.length" />
     <AppListItem v-for="student in (students as any)" :key="student.id" class="student__data" v-else>
-      {{ student.last_name }} {{ student.first_name }} {{ student.status }}
+      {{ student.last_name }} {{ student.first_name }} 
     </AppListItem>
   </div>
 </template>

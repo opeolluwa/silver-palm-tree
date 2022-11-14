@@ -151,7 +151,7 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" class="d-none" />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" class="" />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />

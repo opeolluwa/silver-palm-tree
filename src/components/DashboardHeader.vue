@@ -39,7 +39,7 @@ export default defineComponent({
     // the current route name
     currentRouteName() {
       const route = this.$route.name;
-      return String(route).replaceAll("-", " ") || "360 Devs";
+      return String(route).replaceAll("-", " ") || "RFID";
     },
     //is if current route us the home routs
     isHomeRoute() {
@@ -56,8 +56,8 @@ export default defineComponent({
   <header class="view">
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
+      <Icon icon="mdi:menu" @click="$emit('open-sidebar')" v-if="isHomeRoute" />
       <Icon icon="mdi:chevron-left" @click="goBack" v-if="!isHomeRoute" />
-
       <div id="current__route">
         <RouterLink :to="{ name: 'home' }">{{ currentRouteName }}</RouterLink>
       </div>
